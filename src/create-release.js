@@ -21,11 +21,15 @@ async function run() {
     const prerelease = core.getInput('prerelease', { required: false }) === 'true';
 
     const bodyPath = core.getInput('body_path', { required: false });
+    console.log('>>', bodyPath);
     let bodyFileContent = null;
     if (bodyPath !== '' && !!bodyPath) {
       try {
+        console.log('>> Starting read file', bodyPath);
         bodyFileContent = fs.readFileSync(bodyPath, { encoding: 'utf8' });
+        console.log('>> File read', bodyFileContent);
       } catch (error) {
+        console.log('>> ERROR');
         core.setFailed(error.message);
       }
     }
